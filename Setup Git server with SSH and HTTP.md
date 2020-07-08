@@ -169,7 +169,7 @@ To add new users to the git.passwd db we can use the *htpasswd* command.
 ```
 sudo htpasswd -c /etc/apache2/git.passwd USERNAME
 ```
-# remove -c to add other users to the db
+***remove -c to add other users to the db***
 
 
 And restart the Apache service again, because we changed the configurations.
