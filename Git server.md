@@ -1,6 +1,6 @@
 # Setup a Git Server with SSH and Apache HTTP Server
 
-####Do all of this on your server!
+#### Do all of this on your server!
 
 ## Update and upgrade packages
 
@@ -13,14 +13,12 @@ sudo apt install git apache2 apache2-utils
 
 ## Configure Apache HTTP Server for Git
 
-It is time to enable some of the Apache's modules and to create a new configuration file.
+First you have to enable Apache's modules and to create a new configuration file on apache's directory.
 
 ```
 sudo a2enmod env cgi alias rewrite
-sudo mkdir /var/www/git
-```
 
-```
+sudo mkdir /var/www/git
 sudo nano /etc/apache2/sites-available/git.conf
 ```
 
