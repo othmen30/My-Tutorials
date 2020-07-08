@@ -231,7 +231,7 @@ If you don't have one, go to you local machine and type the following command:
 ```
 sudo ssh-keygen -t rsa -b 4096 -C "your_email@domain.com"
 ```
-**It's will create a hidden directory (.shh/) with two keys! Give the public one to your server (xxx.pub) and use the private key to connect to the server.**
+*It's will create a hidden directory (.shh/) with two keys! Give the public one to your server (xxx.pub) and use the private key to connect to the server.*
 
 ## Enable firewall rules with UFW
 
