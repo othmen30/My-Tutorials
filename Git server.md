@@ -1,5 +1,7 @@
 # Setup a Git Server with SSH and Apache HTTP Server
 
+####Do all of this on your server!
+
 ## Update and upgrade packages
 
 ```
