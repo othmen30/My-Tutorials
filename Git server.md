@@ -103,25 +103,29 @@ git config http.receivepack true
 git update-server-info
   
 chown -Rf www-data:www-data "${GIT_DIR}/${REPO_NAME}.git"
-  
+
 echo "Git repository '${REPO_NAME}' created in ${GIT_DIR}/${REPO_NAME}.git"
 ```
 
 ---
 
-Make the script executable and try it.
+Make the script executable and try it (It will create a git repository in /var/www/)
 
 ```
 sudo chmod +x /usr/local/bin/git-create-repo.sh
 sudo git-create-repo.sh test
 ```
 
-Test that git functionalities are working.
+Test that git functionalities are working by cloning the remote repo on your local machine, create a text file and push it to the server.
 
 ```
 git clone http://SERVER-IP-ADDRESS/git/test.git
+```
+
+```
 cd test/
 echo "Hello World" > hello
+
 git add .
 git commit -m "initial commit"
 git push origin
@@ -159,12 +163,13 @@ Add the following to your git.conf file:
 
 ---
 
-To add new users to the git.passwd db we can use the htpasswd command.
+To add new users to the git.passwd db we can use the *htpasswd* command.
 
 ```
 sudo htpasswd -c /etc/apache2/git.passwd USERNAME
-# remove -c to add other users to the db
 ```
+# remove -c to add other users to the db
+
 
 And restart the Apache service again, because we changed the configurations.
 
@@ -174,14 +179,32 @@ sudo systemctl restart apache2
   
 ## Add git user for SSH access
 
-Create a new git user and disable change it's default shell (bash) to a non login one (git-shell).
+Create a new git user and disable it's default shell (bash) to a non login one (git-shell).
+
+```
+# ensure that '/usr/bin/git-shell' is listed in the /etc/shells; If not, add it!
+cat /etc/shells
+/bin/sh
+/bin/bash
+/usr/bin/bash
+/bin/rbash
+/usr/bin/rbash
+/bin/dash
+/usr/bin/dash
+/usr/bin/tmux
+/usr/bin/screen
+/usr/bin/git-shell
+```
 
 ```
 sudo useradd -m git
-# ensure that '/usr/bin/git-shell' is listed in the /etc/shells
 sudo usermod -s /usr/bin/git-shell git
+
 # remember to setup a good password
 sudo passwd git
+```
+
+```
 # add your admin account to the git group
 sudo usermod -a -G git YOURUSERADMIN
 ```
@@ -194,7 +217,7 @@ mkdir git-shell-commands
 chmod 755 git-shell-commands
 ```
 
-Create a symbolic link to from the /var/www/git directory to the git user home directory.
+Create a symbolic link to from the /var/www/git directory to the git user home directory, so when you modify something on tour /home/git, it's will be modify in /var/www/git as well.
 
 ```
 sudo ln -s /var/www/git /home/git
