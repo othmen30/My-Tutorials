@@ -2,16 +2,10 @@
 
 ## Update and upgrade packages
 
-It's good to keep things up to date.
-
 ```
 sudo apt update
 sudo apt upgrade
-```
 
-Install the packages we will need for the setup.
-
-```
 sudo apt install git apache2 apache2-utils
 ```
 
