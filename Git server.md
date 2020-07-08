@@ -21,7 +21,7 @@ sudo a2enmod env cgi alias rewrite
 sudo mkdir /var/www/git
 sudo nano /etc/apache2/sites-available/git.conf
 ```
-*** IMPORTANT NOTE: we have create the git folder on "/var/www/", all the code below have this PATH too, if you create your git folder on "/home"; Change the PATH "/var/www" to "/home" when you see them !!! ***
+***IMPORTANT NOTE: we have create the git folder on "/var/www/", all the code below have this PATH too, if you create your git folder on "/home"; Change the PATH "/var/www" to "/home" when you see them !!!***
 
 
 Copy/Paste this code below to your new "git.conf" file:
