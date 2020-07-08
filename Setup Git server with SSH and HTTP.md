@@ -46,10 +46,9 @@ Copy/Paste this code below to your new "git.conf" file:
     Require all granted
   </Directory>
  
-  DocumentRoot /var/www/html
+  DocumentRoot /var/www/git
  
-  <Directory /var/www>
-    DAV On
+  <Directory /var/www/git>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
     Require all granted
@@ -137,10 +136,10 @@ git push origin
 To add proper authentication for our users we need to edit our Apache configuration file again.
 
 ```  
-sudo nano /etc/apache2sites-available/git.conf
+sudo nano /etc/apache2/sites-available/git.conf
 ```
 
-Add the following to your git.conf file:
+Add the following to your git.conf file before the </VirtualHost>:
 
 ---
 
@@ -155,11 +154,6 @@ Add the following to your git.conf file:
     AuthUserFile /etc/apache2/git.passwd
     Require valid-user
   </LocationMatch>
-  
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  LogLevel warn
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
 ```
 
 ---
@@ -184,7 +178,9 @@ Create a new git user and disable it's default shell (bash) to a non login one (
 
 ```
 # ensure that '/usr/bin/git-shell' is listed in the /etc/shells; If not, add it!
+
 cat /etc/shells
+
 /bin/sh
 /bin/bash
 /usr/bin/bash
@@ -214,8 +210,8 @@ Add a necessary folder for the git account in it's home directory.
 
 ```
 cd /home/git/
-mkdir git-shell-commands
-chmod 755 git-shell-commands
+sudo mkdir git-shell-commands
+sudo chmod 755 git-shell-commands
 ```
 
 Create a symbolic link to from the /var/www/git directory to the git user home directory, so when you modify something on tour /home/git, it's will be modify in /var/www/git as well.
