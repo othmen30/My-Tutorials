@@ -13,7 +13,7 @@ sudo apt install git apache2 apache2-utils
 
 ## Configure Apache HTTP Server for Git
 
-First you have to enable Apache's modules and to create a new configuration file on apache's directory.
+First you have to enable Apache's modules and to create a new configuration file on apache's directory (i.e git.conf).
 
 ```
 sudo a2enmod env cgi alias rewrite
@@ -21,8 +21,11 @@ sudo a2enmod env cgi alias rewrite
 sudo mkdir /var/www/git
 sudo nano /etc/apache2/sites-available/git.conf
 ```
+### IMPORTANT NOTE: we have create the git folder on "/var/www/", all the code below have this PATH too, if you create your git folder on "/home"; Change the PATH
+"/var/www" to "/home" when you see them !!!
 
-Add the following to your git.conf file:
+
+Copy/Paste this code below to your new "git.conf" file:
 
 ---
 
@@ -60,14 +63,14 @@ Add the following to your git.conf file:
 
 ---
 
-Remember to change the default configuration file with our new one.
+Disable the "000-default.conf" of Apache and Enable the new "git.conf" file.
 
 ```
 sudo a2dissite 000-default.conf
 sudo a2ensite git.conf
 ```
 
-And restart the Apache service to load them.
+Restart the Apache service to take the change.
 
 ```
 sudo systemctl restart apache2
@@ -78,7 +81,8 @@ Now we will add a script to easily create a new repository:
 ```
 sudo nano /usr/local/bin/git-create-repo.sh
 ```
-Add the following to your git-create-repo file:
+
+Copy/Paste the code below to your new "git-create-repo file" script:
   
 ---
   
