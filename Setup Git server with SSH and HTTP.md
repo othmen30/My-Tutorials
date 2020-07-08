@@ -49,6 +49,7 @@ Copy/Paste this code below to your new "git.conf" file:
   DocumentRoot /var/www/html
  
   <Directory /var/www>
+    DAV On
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
     Require all granted
@@ -224,6 +225,13 @@ sudo ln -s /var/www/git /home/git
 ```
 
 Add the public keys of the team members (id_rsa.pub) to git’s .ssh/authorized_keys file.
+
+If you don't have one, go to you local machine and type the following command:
+
+```
+sudo ssh-keygen -t rsa -b 4096 -C "your_email@domain.com"
+```
+***It's will create a hidden directory (.shh/) with two keys! Give the public one to your server (xxx.pub) and use the private key to connect to the server.***
 
 ## Enable firewall rules with UFW
 
