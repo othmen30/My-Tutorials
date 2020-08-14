@@ -97,6 +97,7 @@ ufw status
 
 ```
 
+```
 Output
 Status: active
 
@@ -104,6 +105,8 @@ To                         Action      From
 --                         ------      ----
 OpenSSH                    ALLOW       Anywhere
 OpenSSH (v6)               ALLOW       Anywhere (v6)
+
+```
 
 As the firewall is currently blocking all connections except for SSH, if you install and configure additional services, you will need to adjust the firewall settings to allow traffic in. You can learn some common UFW operations in our UFW Essentials guide.
 
