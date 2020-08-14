@@ -6,7 +6,8 @@
 ### Introduction
 
 When you first create a new Ubuntu 20.04 server, you should perform some important configuration steps as part of the basic setup. These steps will increase the security and usability of your server, and will give you a solid foundation for subsequent actions.
-Step 1 — Logging in as root
+
+## Step 1 — Logging in as root
 
 To log into your server, you will need to know your server’s public IP address. You will also need the password or — if you installed an SSH key for authentication — the private key for the root user’s account. If you have not already logged into your server, you may want to follow our guide on how to connect to Droplets with SSH, which covers this process in detail.
 
@@ -23,7 +24,8 @@ About root
 The root user is the administrative user in a Linux environment that has very broad privileges. Because of the heightened privileges of the root account, you are discouraged from using it on a regular basis. This is because part of the power inherent with the root account is the ability to make very destructive changes, even by accident.
 
 The next step is setting up a new user account with reduced privileges for day-to-day use. Later, we’ll teach you how to gain increased privileges during only the times when you need them.
-Step 2 — Creating a New User
+
+## Step 2 — Creating a New User
 
 Once you are logged in as root, we’re prepared to add the new user account. In the future, we’ll log in with this new account instead of root.
 
@@ -37,7 +39,8 @@ adduser sammy
 You will be asked a few questions, starting with the account password.
 
 Enter a strong password and, optionally, fill in any of the additional information if you would like. This is not required and you can just hit ENTER in any field you wish to skip.
-Step 3 — Granting Administrative Privileges
+
+## Step 3 — Granting Administrative Privileges
 
 Now, we have a new user account with regular account privileges. However, we may sometimes need to do administrative tasks.
 
@@ -53,7 +56,8 @@ usermod -aG sudo sammy
 ```
 
 Now, when logged in as your regular user, you can type sudo before commands to perform actions with superuser privileges.
-Step 4 — Setting Up a Basic Firewall
+
+## Step 4 — Setting Up a Basic Firewall
 
 Ubuntu 20.04 servers can use the UFW firewall to make sure only connections to certain services are allowed. We can set up a basic firewall very easily using this application.
 
@@ -102,7 +106,8 @@ OpenSSH                    ALLOW       Anywhere
 OpenSSH (v6)               ALLOW       Anywhere (v6)
 
 As the firewall is currently blocking all connections except for SSH, if you install and configure additional services, you will need to adjust the firewall settings to allow traffic in. You can learn some common UFW operations in our UFW Essentials guide.
-Step 5 — Enabling External Access for Your Regular User
+
+## Step 5 — Enabling External Access for Your Regular User
 
 Now that we have a regular user for daily use, we need to make sure we can SSH into the account directly.
 
