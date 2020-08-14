@@ -1,9 +1,9 @@
-### Initial Server Setup with Ubuntu 20.04
+# Initial Server Setup with Ubuntu 20.04
 
     By Brian Boucheron
     PostedApril 23, 2020 77.4k views
 
-# Introduction
+### Introduction
 
 When you first create a new Ubuntu 20.04 server, you should perform some important configuration steps as part of the basic setup. These steps will increase the security and usability of your server, and will give you a solid foundation for subsequent actions.
 Step 1 — Logging in as root
@@ -12,7 +12,10 @@ To log into your server, you will need to know your server’s public IP address
 
 If you are not already connected to your server, log in now as the root user using the following command (substitute the highlighted portion of the command with your server’s public IP address):
 
-    ssh root@your_server_ip
+```
+ssh root@your_server_ip
+
+```
 
 Accept the warning about host authenticity if it appears. If you are using password authentication, provide your root password to log in. If you are using an SSH key that is passphrase protected, you may be prompted to enter the passphrase the first time you use the key each session. If this is your first time logging into the server with a password, you may also be prompted to change the root password.
 About root
@@ -26,7 +29,10 @@ Once you are logged in as root, we’re prepared to add the new user account. In
 
 This example creates a new user called sammy, but you should replace that with a username that you like:
 
-    adduser sammy
+```
+adduser sammy
+
+```
 
 You will be asked a few questions, starting with the account password.
 
@@ -41,7 +47,10 @@ To add these privileges to our new user, we need to add the user to the sudo gro
 
 As root, run this command to add your new user to the sudo group (substitute the highlighted username with your new user):
 
-    usermod -aG sudo sammy
+```
+usermod -aG sudo sammy
+
+```
 
 Now, when logged in as your regular user, you can type sudo before commands to perform actions with superuser privileges.
 Step 4 — Setting Up a Basic Firewall
@@ -54,7 +63,10 @@ Applications can register their profiles with UFW upon installation. These profi
 
 You can see this by typing:
 
-    ufw app list
+```
+ufw app list
+
+```
 
 Output
 Available applications:
@@ -62,15 +74,24 @@ Available applications:
 
 We need to make sure that the firewall allows SSH connections so that we can log back in next time. We can allow these connections by typing:
 
-    ufw allow OpenSSH
+```
+ufw allow OpenSSH
+
+```
 
 Afterwards, we can enable the firewall by typing:
 
-    ufw enable
+```
+ufw enable
+
+```
 
 Type y and press ENTER to proceed. You can see that SSH connections are still allowed by typing:
 
-    ufw status
+```
+ufw status
+
+```
 
 Output
 Status: active
@@ -92,11 +113,17 @@ If the root Account Uses Password Authentication
 
 If you logged in to your root account using a password, then password authentication is enabled for SSH. You can SSH to your new user account by opening up a new terminal session and using SSH with your new username:
 
-    ssh sammy@your_server_ip
+```
+ssh sammy@your_server_ip
+
+```
 
 After entering your regular user’s password, you will be logged in. Remember, if you need to run a command with administrative privileges, type sudo before it like this:
 
-    sudo command_to_run
+```
+sudo command_to_run
+
+```
 
 You will be prompted for your regular user password when using sudo for the first time each session (and periodically afterwards).
 
@@ -113,15 +140,24 @@ Note: The rsync command treats sources and destinations that end with a trailing
 
 If you accidentally add a trailing slash to the command, rsync will copy the contents of the root account’s ~/.ssh directory to the sudo user’s home directory instead of copying the entire ~/.ssh directory structure. The files will be in the wrong location and SSH will not be able to find and use them.
 
-    rsync --archive --chown=sammy:sammy ~/.ssh /home/sammy
+```
+rsync --archive --chown=sammy:sammy ~/.ssh /home/sammy
+
+```
 
 Now, open up a new terminal session on you local machine, and use SSH with your new username:
 
-    ssh sammy@your_server_ip
+```
+ssh sammy@your_server_ip
+
+```
 
 You should be logged in to the new user account without using a password. Remember, if you need to run a command with administrative privileges, type sudo before it like this:
 
-    sudo command_to_run
+```
+sudo command_to_run
+
+```
 
 You will be prompted for your regular user password when using sudo for the first time each session (and periodically afterwards).
 Where To Go From Here?
