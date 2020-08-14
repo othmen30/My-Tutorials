@@ -15,7 +15,6 @@ If you are not already connected to your server, log in now as the root user usi
 
 ```
 ssh root@your_server_ip
-
 ```
 
 Accept the warning about host authenticity if it appears. If you are using password authentication, provide your root password to log in. If you are using an SSH key that is passphrase protected, you may be prompted to enter the passphrase the first time you use the key each session. If this is your first time logging into the server with a password, you may also be prompted to change the root password.
@@ -33,7 +32,6 @@ This example creates a new user called sammy, but you should replace that with a
 
 ```
 adduser sammy
-
 ```
 
 You will be asked a few questions, starting with the account password.
@@ -52,7 +50,6 @@ As root, run this command to add your new user to the sudo group (substitute the
 
 ```
 usermod -aG sudo sammy
-
 ```
 
 Now, when logged in as your regular user, you can type sudo before commands to perform actions with superuser privileges.
@@ -69,32 +66,29 @@ You can see this by typing:
 
 ```
 ufw app list
-
 ```
-
+```
 Output
 Available applications:
   OpenSSH
+```
 
 We need to make sure that the firewall allows SSH connections so that we can log back in next time. We can allow these connections by typing:
 
 ```
 ufw allow OpenSSH
-
 ```
 
 Afterwards, we can enable the firewall by typing:
 
 ```
 ufw enable
-
 ```
 
 Type y and press ENTER to proceed. You can see that SSH connections are still allowed by typing:
 
 ```
 ufw status
-
 ```
 
 ```
@@ -105,7 +99,6 @@ To                         Action      From
 --                         ------      ----
 OpenSSH                    ALLOW       Anywhere
 OpenSSH (v6)               ALLOW       Anywhere (v6)
-
 ```
 
 As the firewall is currently blocking all connections except for SSH, if you install and configure additional services, you will need to adjust the firewall settings to allow traffic in. You can learn some common UFW operations in our UFW Essentials guide.
@@ -123,14 +116,12 @@ If you logged in to your root account using a password, then password authentica
 
 ```
 ssh sammy@your_server_ip
-
 ```
 
 After entering your regular user’s password, you will be logged in. Remember, if you need to run a command with administrative privileges, type sudo before it like this:
 
 ```
 sudo command_to_run
-
 ```
 
 You will be prompted for your regular user password when using sudo for the first time each session (and periodically afterwards).
@@ -150,21 +141,18 @@ If you accidentally add a trailing slash to the command, rsync will copy the con
 
 ```
 rsync --archive --chown=sammy:sammy ~/.ssh /home/sammy
-
 ```
 
 Now, open up a new terminal session on you local machine, and use SSH with your new username:
 
 ```
 ssh sammy@your_server_ip
-
 ```
 
 You should be logged in to the new user account without using a password. Remember, if you need to run a command with administrative privileges, type sudo before it like this:
 
 ```
 sudo command_to_run
-
 ```
 
 You will be prompted for your regular user password when using sudo for the first time each session (and periodically afterwards).
