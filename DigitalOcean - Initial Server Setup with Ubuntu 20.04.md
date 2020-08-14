@@ -9,7 +9,7 @@ When you first create a new Ubuntu 20.04 server, you should perform some importa
 
 ## Step 1 — Logging in as root
 
-To log into your server, you will need to know your server’s public IP address. You will also need the password or — if you installed an SSH key for authentication — the private key for the root user’s account. If you have not already logged into your server, you may want to follow our guide on how to connect to Droplets with SSH, which covers this process in detail.
+To log into your server, you will need to know your **server’s public IP address**. You will also need the password or — if you installed an SSH key for authentication — the private key for the root user’s account. If you have not already logged into your server, you may want to follow the guide **on how to connect to Droplets with SSH**, which covers this process in detail.
 
 If you are not already connected to your server, log in now as the root user using the following command (substitute the highlighted portion of the command with your server’s public IP address):
 
@@ -18,17 +18,18 @@ ssh root@your_server_ip
 ```
 
 Accept the warning about host authenticity if it appears. If you are using password authentication, provide your root password to log in. If you are using an SSH key that is passphrase protected, you may be prompted to enter the passphrase the first time you use the key each session. If this is your first time logging into the server with a password, you may also be prompted to change the root password.
-About root
 
-The root user is the administrative user in a Linux environment that has very broad privileges. Because of the heightened privileges of the root account, you are discouraged from using it on a regular basis. This is because part of the power inherent with the root account is the ability to make very destructive changes, even by accident.
+### About root
+
+The **root** user is the administrative user in a Linux environment that has very broad privileges. Because of the heightened privileges of the **root** account, you are discouraged from using it on a regular basis. This is because part of the power inherent with the **root** account is the ability to make very destructive changes, even by accident.
 
 The next step is setting up a new user account with reduced privileges for day-to-day use. Later, we’ll teach you how to gain increased privileges during only the times when you need them.
 
 ## Step 2 — Creating a New User
 
-Once you are logged in as root, we’re prepared to add the new user account. In the future, we’ll log in with this new account instead of root.
+Once you are logged in as **root**, we’re prepared to add the new user account. In the future, we’ll log in with this new account instead of **root**.
 
-This example creates a new user called sammy, but you should replace that with a username that you like:
+This example creates a new user called **sammy**, but you should replace that with a username that you like:
 
 ```
 adduser sammy
