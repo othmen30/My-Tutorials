@@ -1,58 +1,58 @@
-# Configuration initiale de serveur avec Ubuntu 20.04
+### Initial Server Setup with Ubuntu 20.04
 
     By Brian Boucheron
-    PostedMay 13, 2020 2.4k views
+    PostedApril 23, 2020 77.4k views
 
-###Introduction
+# Introduction
 
-Lorsque vous créez un nouveau serveur Ubuntu 20.04, vous devez effectuer quelques étapes de configuration importantes dans le cadre de la configuration de base. Ces étapes augmenteront la sécurité et la convivialité de votre serveur, et vous donneront une base solide pour les actions ultérieures.
-Étape 1 - Connexion en tant que root
+When you first create a new Ubuntu 20.04 server, you should perform some important configuration steps as part of the basic setup. These steps will increase the security and usability of your server, and will give you a solid foundation for subsequent actions.
+Step 1 — Logging in as root
 
-Pour vous connecter à votre serveur, vous devez connaître l’adresse IP publique de votre serveur. Vous aurez également besoin du mot de passe ou - si vous avez installé une clé SSH pour l'authentification - de la clé privée du compte de l'utilisateur root. Si vous n'êtes pas encore connecté à votre serveur, vous pouvez suivre notre guide sur Comment vous connecter à votre Droplet avec SSH, qui couvre ce processus en détail.
+To log into your server, you will need to know your server’s public IP address. You will also need the password or — if you installed an SSH key for authentication — the private key for the root user’s account. If you have not already logged into your server, you may want to follow our guide on how to connect to Droplets with SSH, which covers this process in detail.
 
-Si vous n'êtes pas encore connecté à votre serveur, connectez-vous maintenant en tant qu'utilisateur root en utilisant la commande suivante (remplacez la partie surlignée de la commande par l'adresse IP publique de votre serveur) :
+If you are not already connected to your server, log in now as the root user using the following command (substitute the highlighted portion of the command with your server’s public IP address):
 
     ssh root@your_server_ip
 
-Acceptez l'avertissement concernant l'authenticité de l'hôte s'il apparaît. Si vous utilisez l'authentification par mot de passe, fournissez votre mot de passe root pour vous connecter. Si vous utilisez une clé SSH qui est protégée par une phrase de passe, il se peut que vous soyez invité à entrer la phrase de passe la première fois que vous utilisez la clé à chaque session. Si c'est la première fois que vous vous connectez au serveur avec un mot de passe, vous pouvez également être invité à changer le mot de passe root.
-À propos de Root
+Accept the warning about host authenticity if it appears. If you are using password authentication, provide your root password to log in. If you are using an SSH key that is passphrase protected, you may be prompted to enter the passphrase the first time you use the key each session. If this is your first time logging into the server with a password, you may also be prompted to change the root password.
+About root
 
-L'utilisateur root est l'utilisateur administratif dans un environnement Linux qui dispose de privilèges très larges. En raison des privilèges accrus du compte root, il est déconseillé de l'utiliser régulièrement. En effet, une partie du pouvoir inhérent au compte root est sa capacité à effectuer des changements très destructeurs, même par accident.
+The root user is the administrative user in a Linux environment that has very broad privileges. Because of the heightened privileges of the root account, you are discouraged from using it on a regular basis. This is because part of the power inherent with the root account is the ability to make very destructive changes, even by accident.
 
-L'étape suivante consiste à mettre en place un nouveau compte d'utilisateur avec des privilèges réduits pour une utilisation quotidienne. Plus tard, nous vous apprendrons comment obtenir des privilèges accrus uniquement lorsque vous en avez besoin.
-Étape 2 - Création d'un nouvel utilisateur
+The next step is setting up a new user account with reduced privileges for day-to-day use. Later, we’ll teach you how to gain increased privileges during only the times when you need them.
+Step 2 — Creating a New User
 
-Une fois que vous êtes connecté en tant que root, nous sommes prêts à ajouter le nouveau compte d'utilisateur. Dans le futur, nous nous connecterons à ce nouveau compte au lieu de root.
+Once you are logged in as root, we’re prepared to add the new user account. In the future, we’ll log in with this new account instead of root.
 
-Cet exemple crée un nouvel utilisateur appelé sammy, mais vous devez le remplacer par le nom d'utilisateur qui vous convient :
+This example creates a new user called sammy, but you should replace that with a username that you like:
 
     adduser sammy
 
-Quelques questions vous seront posées, en commençant par le mot de passe du compte.
+You will be asked a few questions, starting with the account password.
 
-Saisissez un mot de passe fort et, éventuellement, remplissez les informations complémentaires si vous le souhaitez. Ce n'est pas obligatoire et vous pouvez juste appuyer sur ENTER dans n'importe quel champ que vous souhaitez ignorer.
-Étape 3 - Attribution des privilèges administratifs
+Enter a strong password and, optionally, fill in any of the additional information if you would like. This is not required and you can just hit ENTER in any field you wish to skip.
+Step 3 — Granting Administrative Privileges
 
-Maintenant, nous avons un nouveau compte utilisateur avec des privilèges de compte ordinaires. Cependant, nous devons parfois effectuer des tâches administratives.
+Now, we have a new user account with regular account privileges. However, we may sometimes need to do administrative tasks.
 
-Pour éviter d'avoir à nous déconnecter de notre utilisateur normal et à nous reconnecter en tant que compte root, nous pouvons configurer ce que l'on appelle des privilèges de super-utilisateur ou de root pour notre compte ordinaire. Cela permettra à notre utilisateur normal d'exécuter des commandes avec des privilèges administratifs en plaçant le mot sudo avant chaque commande.
+To avoid having to log out of our normal user and log back in as the root account, we can set up what is known as superuser or root privileges for our normal account. This will allow our normal user to run commands with administrative privileges by putting the word sudo before each command.
 
-Pour ajouter ces privilèges à notre nouvel utilisateur, nous devons ajouter l'utilisateur au groupe sudo. Par défaut, sur Ubuntu 20.04, les utilisateurs qui sont membres du groupe sudo sont autorisés à utiliser la commande sudo.
+To add these privileges to our new user, we need to add the user to the sudo group. By default, on Ubuntu 20.04, users who are members of the sudo group are allowed to use the sudo command.
 
-En tant que root, exécutez cette commande pour ajouter votre nouvel utilisateur au groupe sudo (remplacez le nom d'utilisateur en surbrillance par celui de votre nouvel utilisateur) :
+As root, run this command to add your new user to the sudo group (substitute the highlighted username with your new user):
 
     usermod -aG sudo sammy
 
-Maintenant, lorsque vous êtes connecté en tant qu'utilisateur régulier, vous pouvez taper sudo avant les commandes pour effectuer des actions avec des privilèges de super-utilisateur.
-Étape 4 - Mise en place un pare-feu de base
+Now, when logged in as your regular user, you can type sudo before commands to perform actions with superuser privileges.
+Step 4 — Setting Up a Basic Firewall
 
-Les serveurs Ubuntu 20.04 peuvent utiliser le pare-feu UFW pour s'assurer que seules les connexions à certains services sont autorisées. Nous pouvons très facilement mettre place un pare-feu de base en utilisant cette application.
+Ubuntu 20.04 servers can use the UFW firewall to make sure only connections to certain services are allowed. We can set up a basic firewall very easily using this application.
 
-Remarque : si vos serveurs tournent sur DigitalOcean, vous pouvez éventuellement utiliser les pare-feux Cloud de DigitalOcean au lieu du pare-feu UFW. Nous recommandons de n'utiliser qu'un seul pare-feu à la fois pour éviter les règles contradictoires qui peuvent être difficiles à déboguer.
+Note: If your servers are running on DigitalOcean, you can optionally use DigitalOcean Cloud Firewalls instead of the UFW firewall. We recommend using only one firewall at a time to avoid conflicting rules that may be difficult to debug.
 
-Les applications peuvent enregistrer leurs profils dans UFW lors de leur installation. Ces profils permettent à UFW de gérer ces applications par nom. OpenSSH, le service qui nous permet maintenant de nous connecter à notre serveur, dispose d'un profil enregistré avec UFW.
+Applications can register their profiles with UFW upon installation. These profiles allow UFW to manage these applications by name. OpenSSH, the service allowing us to connect to our server now, has a profile registered with UFW.
 
-Vous pouvez le voir en tapant :
+You can see this by typing:
 
     ufw app list
 
@@ -60,15 +60,15 @@ Output
 Available applications:
   OpenSSH
 
-Nous devons nous assurer que le pare-feu autorise les connexions SSH afin de pouvoir nous reconnecter la prochaine fois. Nous pouvons autoriser ces connexions en tapant :
+We need to make sure that the firewall allows SSH connections so that we can log back in next time. We can allow these connections by typing:
 
     ufw allow OpenSSH
 
-Après quoi, nous pouvons activer le pare-feu en tapant :
+Afterwards, we can enable the firewall by typing:
 
     ufw enable
 
-Tapez y et appuyez sur ENTER pour continuer. Vous pouvez voir que les connexions SSH sont toujours autorisées en tapant :
+Type y and press ENTER to proceed. You can see that SSH connections are still allowed by typing:
 
     ufw status
 
@@ -80,54 +80,50 @@ To                         Action      From
 OpenSSH                    ALLOW       Anywhere
 OpenSSH (v6)               ALLOW       Anywhere (v6)
 
-Comme le pare-feu bloque actuellement toutes les connexions, sauf les connexions SSH, si vous installez et configurez des services supplémentaires, vous devrez ajuster les paramètres de pare-feu pour autoriser le trafic. Vous pouvez apprendre quelques opérations courantes UFW dans notre guide des fondamentaux UFW.
-Étape 5 - Activation de l'accès externe pour votre utilisateur ordinaire
+As the firewall is currently blocking all connections except for SSH, if you install and configure additional services, you will need to adjust the firewall settings to allow traffic in. You can learn some common UFW operations in our UFW Essentials guide.
+Step 5 — Enabling External Access for Your Regular User
 
-Maintenant que nous avons un utilisateur régulier pour un usage quotidien, nous devons nous assurer que nous pouvons SSH directement dans le compte.
+Now that we have a regular user for daily use, we need to make sure we can SSH into the account directly.
 
-Remarque : tant que vous n'avez pas vérifié que vous pouviez vous connecter et utiliser sudo avec votre nouvel utilisateur, nous vous recommandons de rester connecté en tant que root. De cette façon, si vous avez des problèmes, vous pouvez les résoudre et apporter les changements nécessaires en tant que root. Si vous utilisez une Droplet DigitalOcean et que vous rencontrez des problèmes avec votre connexion SSH root, vous pouvez vous connecter à la Droplet en utilisant la Console DigitalOcean.
+Note: Until verifying that you can log in and use sudo with your new user, we recommend staying logged in as root. This way, if you have problems, you can troubleshoot and make any necessary changes as root. If you are using a DigitalOcean Droplet and experience problems with your root SSH connection, you can log into the Droplet using the DigitalOcean Console.
 
-Le processus de configuration de l'accès SSH pour votre nouvel utilisateur dépend du fait que le compte root de votre serveur utilise un mot de passe ou des clés SSH pour l'authentification.
-Si le compte root utilise l'authentification par mot de passe
+The process for configuring SSH access for your new user depends on whether your server’s root account uses a password or SSH keys for authentication.
+If the root Account Uses Password Authentication
 
-Si vous vous êtes connecté à votre compte root à l'aide d'un mot de passe, l'authentification par mot de passe est alors activée pour SSH. Vous pouvez accéder à votre nouveau compte utilisateur en ouvrant une nouvelle session de terminal et en utilisant SSH avec votre nouveau nom d'utilisateur :
+If you logged in to your root account using a password, then password authentication is enabled for SSH. You can SSH to your new user account by opening up a new terminal session and using SSH with your new username:
 
     ssh sammy@your_server_ip
 
-Après avoir saisi votre mot de passe d'utilisateur habituel, vous serez connecté. N'oubliez pas que si vous devez gérer une commande avec des privilèges administratifs, tapez sudo devant comme ceci :
+After entering your regular user’s password, you will be logged in. Remember, if you need to run a command with administrative privileges, type sudo before it like this:
 
     sudo command_to_run
 
-Votre mot de passe d'utilisateur habituel vous sera demandé lors de la première utilisation de sudo à chaque session (et périodiquement par la suite).
+You will be prompted for your regular user password when using sudo for the first time each session (and periodically afterwards).
 
-Pour renforcer la sécurité de votre serveur, nous vous recommandons vivement de configurer des clés SSH plutôt que d'utiliser une authentification par mot de passe. Suivez notre guide sur la Configuration des clés SSH sur Ubuntu 20.04 pour apprendre comment configurer l'authentification par clé.
-Si le compte root utilise l'authentification par clé SSH
+To enhance your server’s security, we strongly recommend setting up SSH keys instead of using password authentication. Follow our guide on setting up SSH keys on Ubuntu 20.04 to learn how to configure key-based authentication.
+If the Root Account Uses SSH Key Authentication
 
-Si vous vous êtes connecté à votre compte root en utilisant des clés SSH, l'authentification par mot de passe est désactivée pour SSH. Vous devrez ajouter une copie de votre clé publique locale au fichier ~/.ssh/authorized_keys du nouvel utilisateur pour vous connecter avec succès.
+If you logged in to your root account using SSH keys, then password authentication is disabled for SSH. You will need to add a copy of your local public key to the new user’s ~/.ssh/authorized_keys file to log in successfully.
 
-Comme votre clé publique se trouve déjà dans le fichier ~/.ssh/authorized_keys du compte root sur le serveur, nous pouvons copier ce fichier et la structure des répertoires sur notre nouveau compte utilisateur dans notre session existante.
+Since your public key is already in the root account’s ~/.ssh/authorized_keys file on the server, we can copy that file and directory structure to our new user account in our existing session.
 
-La commande rsync représente la façon la plus simple de copier les fichiers avec la propriété et les autorisations correctes. Cela permet de copier le répertoire .ssh de l'utilisateur root, de préserver les permissions et de modifier les propriétaires de fichiers, le tout en une seule commande. Veillez à modifier les parties surlignées de la commande ci-dessous pour qu'elles correspondent à votre nom d'utilisateur habituel :
+The simplest way to copy the files with the correct ownership and permissions is with the rsync command. This will copy the root user’s .ssh directory, preserve the permissions, and modify the file owners, all in a single command. Make sure to change the highlighted portions of the command below to match your regular user’s name:
 
-Remarque : la commande rsync traite différemment les sources et les destinations qui se terminent par une barre oblique et celles sans barre oblique. Lorsque vous utilisez rsync ci-dessous, assurez-vous que le répertoire source (~/.ssh) ne comporte pas de barre oblique (vérifiez que vous n'utilisez pas ~/.ssh/).
+Note: The rsync command treats sources and destinations that end with a trailing slash differently than those without a trailing slash. When using rsync below, be sure that the source directory (~/.ssh) does not include a trailing slash (check to make sure you are not using ~/.ssh/).
 
-Si vous ajoutez accidentellement une barre oblique à la fin de la commande, rsync copiera le contenu du répertoire ~/.ssh du compte root dans le répertoire personnel de l'utilisateur sudo au lieu de copier toute la structure du répertoire ~/.ssh. Les fichiers se trouveront au mauvais endroit et les SSH ne seront pas en mesure de les trouver et de les utiliser.
+If you accidentally add a trailing slash to the command, rsync will copy the contents of the root account’s ~/.ssh directory to the sudo user’s home directory instead of copying the entire ~/.ssh directory structure. The files will be in the wrong location and SSH will not be able to find and use them.
 
     rsync --archive --chown=sammy:sammy ~/.ssh /home/sammy
 
-Maintenant, ouvrez une nouvelle session de terminal sur vous machine locale, et utilisez le SSH avec votre nouveau nom d'utilisateur :
+Now, open up a new terminal session on you local machine, and use SSH with your new username:
 
     ssh sammy@your_server_ip
 
-Vous devez être connecté au nouveau compte utilisateur sans utiliser de mot de passe. N'oubliez pas que si vous devez gérer une commande avec des privilèges administratifs, tapez sudo devant comme ceci :
+You should be logged in to the new user account without using a password. Remember, if you need to run a command with administrative privileges, type sudo before it like this:
 
     sudo command_to_run
 
-Votre mot de passe d'utilisateur habituel vous sera demandé lors de la première utilisation de sudo à chaque session (et périodiquement par la suite).
-Que faire maintenant ?
+You will be prompted for your regular user password when using sudo for the first time each session (and periodically afterwards).
+Where To Go From Here?
 
-À ce stade, vous disposez d'une base solide pour votre serveur. Vous pouvez désormais installer tous les logiciels dont vous avez besoin sur votre serveur.
-Qu'avez-vous pensé de cette traduction?
-Was this helpful?
-0
-Report an issue
+At this point, you have a solid foundation for your server. You can install any of the software you need on your server now.
