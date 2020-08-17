@@ -102,7 +102,7 @@ Again, use apt to acquire and install this software:
 sudo apt install mysql-server
 ```
 
-When prompted, confirm installation by typing Y, and then ENTER.
+When prompted, confirm installation by typing ```Y```, and then ```ENTER```.
 
 When the installation is finished, it’s recommended that you run a security script that comes pre-installed with MySQL. This script will remove some insecure default settings and lock down access to your database system. Start the interactive script by running:
 
@@ -110,11 +110,11 @@ When the installation is finished, it’s recommended that you run a security sc
 sudo mysql_secure_installation
 ```
 
-This will ask if you want to configure the VALIDATE PASSWORD PLUGIN.
+This will ask if you want to configure the ```VALIDATE PASSWORD PLUGIN```.
 
 Note: Enabling this feature is something of a judgment call. If enabled, passwords which don’t match the specified criteria will be rejected by MySQL with an error. It is safe to leave validation disabled, but you should always use strong, unique passwords for database credentials.
 
-Answer Y for yes, or anything else to continue without enabling.
+Answer ```Y``` for yes, or anything else to continue without enabling.
 
 ```
 VALIDATE PASSWORD PLUGIN can be used to test passwords
@@ -125,7 +125,7 @@ secure enough. Would you like to setup VALIDATE PASSWORD plugin?
 Press y|Y for Yes, any other key for No:
 ```
 
-If you answer “yes”, you’ll be asked to select a level of password validation. Keep in mind that if you enter 2 for the strongest level, you will receive errors when attempting to set any password which does not contain numbers, upper and lowercase letters, and special characters, or which is based on common dictionary words.
+If you answer “yes”, you’ll be asked to select a level of password validation. Keep in mind that if you enter ```2``` for the strongest level, you will receive errors when attempting to set any password which does not contain numbers, upper and lowercase letters, and special characters, or which is based on common dictionary words.
 
 ```
 There are three levels of password validation policy:
@@ -141,17 +141,22 @@ Regardless of whether you chose to set up the ```VALIDATE PASSWORD PLUGIN```, yo
 
 If you enabled password validation, you’ll be shown the password strength for the root password you just entered and your server will ask if you want to continue with that password. If you are happy with your current password, enter Y for “yes” at the prompt:
 
+```
 Estimated strength of the password: 100 
 Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) : y
+```
 
-For the rest of the questions, press Y and hit the ENTER key at each prompt. This will remove some anonymous users and the test database, disable remote root logins, and load these new rules so that MySQL immediately respects the changes you have made.
+For the rest of the questions, press ```Y``` and hit the ```ENTER``` key at each prompt. This will remove some anonymous users and the test database, disable remote root logins, and load these new rules so that MySQL immediately respects the changes you have made.
 
 When you’re finished, test if you’re able to log in to the MySQL console by typing:
 
-    sudo mysql
+```
+sudo mysql
+```
 
-This will connect to the MySQL server as the administrative database user root, which is inferred by the use of sudo when running this command. You should see output like this:
+This will connect to the MySQL server as the administrative database user root, which is inferred by the use of ```sudo``` when running this command. You should see output like this:
 
+```
 Output
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 22
@@ -165,33 +170,37 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> 
+mysql>
+```
 
 To exit the MySQL console, type:
 
-    exit
+```
+mysql> exit
+```
 
-Notice that you didn’t need to provide a password to connect as the root user, even though you have defined one when running the mysql_secure_installation script. That is because the default authentication method for the administrative MySQL user is unix_socket instead of password. Even though this might look like a security concern at first, it makes the database server more secure because the only users allowed to log in as the root MySQL user are the system users with sudo privileges connecting from the console or through an application running with the same privileges. In practical terms, that means you won’t be able to use the administrative database root user to connect from your PHP application. Setting a password for the root MySQL account works as a safeguard, in case the default authentication method is changed from unix_socket to password.
+Notice that you didn’t need to provide a password to connect as the root user, even though you have defined one when running the ```mysql_secure_installation``` script. That is because the default authentication method for the administrative MySQL user is ```unix_socket``` instead of ```password```. Even though this might look like a security concern at first, it makes the database server more secure because the only users allowed to log in as the root MySQL user are the system users with sudo privileges connecting from the console or through an application running with the same privileges. In practical terms, that means you won’t be able to use the administrative database root user to connect from your PHP application. Setting a password for the root MySQL account works as a safeguard, in case the default authentication method is changed from ```unix_socket``` to ```password```.
 
 For increased security, it’s best to have dedicated user accounts with less expansive privileges set up for every database, especially if you plan on having multiple databases hosted on your server.
 
-Note: At the time of this writing, the native MySQL PHP library mysqlnd doesn’t support caching_sha2_authentication, the default authentication method for MySQL 8. For that reason, when creating database users for PHP applications on MySQL 8, you’ll need to make sure they’re configured to use mysql_native_password instead. We’ll demonstrate how to do that in Step 6.
+***Note: At the time of this writing, the native MySQL PHP library mysqlnd doesn’t support caching_sha2_authentication, the default authentication method for MySQL 8. For that reason, when creating database users for PHP applications on MySQL 8, you’ll need to make sure they’re configured to use mysql_native_password instead. We’ll demonstrate how to do that in Step 6.***
 
 Your MySQL server is now installed and secured. Next, we’ll install PHP, the final component in the LEMP stack.
-Step 3 – Installing PHP
+
+# Step 3 – Installing PHP
 
 You have Nginx installed to serve your content and MySQL installed to store and manage your data. Now you can install PHP to process code and generate dynamic content for the web server.
 
-While Apache embeds the PHP interpreter in each request, Nginx requires an external program to handle PHP processing and act as a bridge between the PHP interpreter itself and the web server. This allows for a better overall performance in most PHP-based websites, but it requires additional configuration. You’ll need to install php-fpm, which stands for “PHP fastCGI process manager”, and tell Nginx to pass PHP requests to this software for processing. Additionally, you’ll need php-mysql, a PHP module that allows PHP to communicate with MySQL-based databases. Core PHP packages will automatically be installed as dependencies.
+While Apache embeds the PHP interpreter in each request, Nginx requires an external program to handle PHP processing and act as a bridge between the PHP interpreter itself and the web server. This allows for a better overall performance in most PHP-based websites, but it requires additional configuration. You’ll need to install ```php-fpm```, which stands for “PHP fastCGI process manager”, and tell Nginx to pass PHP requests to this software for processing. Additionally, you’ll need ```php-mysql```, a PHP module that allows PHP to communicate with MySQL-based databases. Core PHP packages will automatically be installed as dependencies.
 
-To install the php-fpm and php-mysql packages, run:
+To install the ```php-fpm``` and ```php-mysql``` packages, run:
 
-    sudo apt install php-fpm php-mysql
-
-When prompted, type Y and ENTER to confirm installation.
-
+```
+sudo apt install php-fpm php-mysql
+```
 You now have your PHP components installed. Next, you’ll configure Nginx to use them.
-Step 4 — Configuring Nginx to Use the PHP Processor
+
+# Step 4 — Configuring Nginx to Use the PHP Processor
 
 When using the Nginx web server, we can create server blocks (similar to virtual hosts in Apache) to encapsulate configuration details and host more than one domain on a single server. In this guide, we’ll use your_domain as an example domain name. To learn more about setting up a domain name with DigitalOcean, see our introduction to DigitalOcean DNS.
 
