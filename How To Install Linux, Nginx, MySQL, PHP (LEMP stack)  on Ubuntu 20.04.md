@@ -1,12 +1,9 @@
-How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 20.04
-NginxUbuntuPHPLEMPUbuntu 20.04
+# How To Install Linux, Nginx, MySQL, PHP (LEMP stack) on Ubuntu 20.04
 
     By Erika Heidi
     PostedApril 29, 2020 33.6k views
 
-Not using Ubuntu 20.04?
-Choose a different version or distribution.
-Introduction
+### Introduction
 
 The LEMP software stack is a group of software that can be used to serve dynamic web pages and web applications written in PHP. This is an acronym that describes a Linux operating system, with an Nginx (pronounced like “Engine-X”) web server. The backend data is stored in the MySQL database and the dynamic processing is handled by PHP.
 
@@ -14,40 +11,52 @@ This guide demonstrates how to install a LEMP stack on an Ubuntu 20.04 server. T
 Prerequisites
 
 In order to complete this tutorial, you will need access to an Ubuntu 20.04 server as a regular, non-root sudo user, and a firewall enabled on your server. To set this up, you can follow our initial server setup guide for Ubuntu 20.04.
-Step 1 – Installing the Nginx Web Server
+
+## Step 1 – Installing the Nginx Web Server
 
 In order to display web pages to our site visitors, we are going to employ Nginx, a high-performance web server. We’ll use the apt package manager to obtain this software.
 
 Since this is our first time using apt for this session, start off by updating your server’s package index. Following that, you can use apt install to get Nginx installed:
 
-    sudo apt update
-    sudo apt install nginx
+```
+sudo apt update
+sudo apt install nginx
+```
 
 When prompted, enter Y to confirm that you want to install Nginx. Once the installation is finished, the Nginx web server will be active and running on your Ubuntu 20.04 server.
 
 If you have the ufw firewall enabled, as recommended in our initial server setup guide, you will need to allow connections to Nginx. Nginx registers a few different UFW application profiles upon installation. To check which UFW profiles are available, run:
 
-    sudo ufw app list
+```
+sudo ufw app list
+```
 
+```
 Output
 Available applications:
   Nginx Full
   Nginx HTTP
   Nginx HTTPS
   OpenSSH
+```
 
 It is recommended that you enable the most restrictive profile that will still allow the traffic you need. Since you haven’t configured SSL for your server in this guide, you will only need to allow regular HTTP traffic on port 80.
 
 Enable this by typing:
 
-    sudo ufw allow 'Nginx HTTP'
+```
+sudo ufw allow 'Nginx HTTP'
+```
 
 You can verify the change by running:
 
-    sudo ufw status
+```
+sudo ufw status
+```
 
 This command’s output will show that HTTP traffic is now allowed:
 
+```
 Output
 Status: active
 
@@ -57,18 +66,23 @@ OpenSSH                    ALLOW       Anywhere
 Nginx HTTP                 ALLOW       Anywhere
 OpenSSH (v6)               ALLOW       Anywhere (v6)
 Nginx HTTP (v6)            ALLOW       Anywhere (v6)
+```
 
 With the new firewall rule added, you can test if the server is up and running by accessing your server’s domain name or public IP address in your web browser.
 
 If you do not have a domain name pointed at your server and you do not know your server’s public IP address, you can find it by running the following command:
 
-    ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+```
+ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+```
 
 This will print out a few IP addresses. You can try each of them in turn in your web browser.
 
 As an alternative, you can check which IP address is accessible, as viewed from other locations on the internet:
 
-    curl -4 icanhazip.com
+```
+curl -4 icanhazip.com
+```
 
 Type the address that you receive in your web browser and it will take you to Nginx’s default landing page:
 
@@ -77,7 +91,8 @@ http://server_domain_or_IP
 Nginx default page
 
 If you see this page, it means you have successfully installed Nginx and enabled HTTP traffic for your web server.
-Step 2 — Installing MySQL
+
+# Step 2 — Installing MySQL
 
 Now that you have a web server up and running, you need to install the database system to be able to store and manage data for your site. MySQL is a popular database management system used within PHP environments.
 
