@@ -202,25 +202,32 @@ You now have your PHP components installed. Next, you’ll configure Nginx to us
 
 # Step 4 — Configuring Nginx to Use the PHP Processor
 
-When using the Nginx web server, we can create server blocks (similar to virtual hosts in Apache) to encapsulate configuration details and host more than one domain on a single server. In this guide, we’ll use your_domain as an example domain name. To learn more about setting up a domain name with DigitalOcean, see our introduction to DigitalOcean DNS.
+When using the Nginx web server, we can create server blocks (similar to virtual hosts in Apache) to encapsulate configuration details and host more than one domain on a single server. In this guide, we’ll use **your_domain** as an example domain name.
 
-On Ubuntu 20.04, Nginx has one server block enabled by default and is configured to serve documents out of a directory at /var/www/html. While this works well for a single site, it can become difficult to manage if you are hosting multiple sites. Instead of modifying /var/www/html, we’ll create a directory structure within /var/www for the your_domain website, leaving /var/www/html in place as the default directory to be served if a client request doesn’t match any other sites.
+On Ubuntu 20.04, Nginx has one server block enabled by default and is configured to serve documents out of a directory at ```/var/www/html```. While this works well for a single site, it can become difficult to manage if you are hosting multiple sites. Instead of modifying ```/var/www/html```, we’ll create a directory structure within ```/var/www``` for the **your_domain** website, leaving ```/var/www/html``` in place as the default directory to be served if a client request doesn’t match any other sites.
 
-Create the root web directory for your_domain as follows:
+Create the root web directory for **your_domain** as follows:
 
-    sudo mkdir /var/www/your_domain
+```
+sudo mkdir /var/www/your_domain
+```
 
 Next, assign ownership of the directory with the $USER environment variable, which will reference your current system user:
 
-    sudo chown -R $USER:$USER /var/www/your_domain
+```
+sudo chown -R $USER:$USER /var/www/your_domain
+```
 
-Then, open a new configuration file in Nginx’s sites-available directory using your preferred command-line editor. Here, we’ll use nano:
+Then, open a new configuration file in Nginx’s ```sites-available``` directory using your preferred command-line editor. Here, we’ll use nano:
 
-    sudo nano /etc/nginx/sites-available/your_domain
+```
+sudo nano /etc/nginx/sites-available/your_domain
+```
 
 This will create a new blank file. Paste in the following bare-bones configuration:
 /etc/nginx/sites-available/your_domain
 
+```
 server {
     listen 80;
     server_name your_domain www.your_domain;
@@ -242,41 +249,50 @@ server {
     }
 
 }
-
+```
 
 Here’s what each of these directives and location blocks do:
 
-    listen — Defines what port Nginx will listen on. In this case, it will listen on port 80, the default port for HTTP.
-    root — Defines the document root where the files served by this website are stored.
-    index — Defines in which order Nginx will prioritize index files for this website. It is a common practice to list index.html files with a higher precedence than index.php files to allow for quickly setting up a maintenance landing page in PHP applications. You can adjust these settings to better suit your application needs.
-    server_name — Defines which domain names and/or IP addresses this server block should respond for. Point this directive to your server’s domain name or public IP address.
-    location / — The first location block includes a try_files directive, which checks for the existence of files or directories matching a URI request. If Nginx cannot find the appropriate resource, it will return a 404 error.
-    location ~ \.php$ — This location block handles the actual PHP processing by pointing Nginx to the fastcgi-php.conf configuration file and the php7.4-fpm.sock file, which declares what socket is associated with php-fpm.
-    location ~ /\.ht — The last location block deals with .htaccess files, which Nginx does not process. By adding the deny all directive, if any .htaccess files happen to find their way into the document root ,they will not be served to visitors.
+```listen``` — Defines what port Nginx will listen on. In this case, it will listen on port 80, the default port for HTTP.
+```root``` — Defines the document root where the files served by this website are stored.
+```index``` — Defines in which order Nginx will prioritize index files for this website. It is a common practice to list index.html files with a higher precedence than index.php files to allow for quickly setting up a maintenance landing page in PHP applications. You can adjust these settings to better suit your application needs.
+```server_name``` — Defines which domain names and/or IP addresses this server block should respond for. **Point this directive to your server’s domain name or public IP address.**
+```location /``` — The first location block includes a try_files directive, which checks for the existence of files or directories matching a URI request. If Nginx cannot find the appropriate resource, it will return a 404 error.
+```location ~ \.php$``` — This location block handles the actual PHP processing by pointing Nginx to the fastcgi-php.conf configuration file and the php7.4-fpm.sock file, which declares what socket is associated with php-fpm.
+```location ~ /\.ht``` — The last location block deals with .htaccess files, which Nginx does not process. By adding the deny all directive, if any .htaccess files happen to find their way into the document root ,they will not be served to visitors.
 
 When you’re done editing, save and close the file. If you’re using nano, you can do so by typing CTRL+X and then y and ENTER to confirm.
 
 Activate your configuration by linking to the config file from Nginx’s sites-enabled directory:
 
-    sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+```
+sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+```
 
 This will tell Nginx to use the configuration next time it is reloaded. You can test your configuration for syntax errors by typing:
 
-    sudo nginx -t
+```
+sudo nginx -t
+```
 
 If any errors are reported, go back to your configuration file to review its contents before continuing.
 
 When you are ready, reload Nginx to apply the changes:
 
-    sudo systemctl reload nginx
+```
+sudo systemctl reload nginx
+```
 
 Your new website is now active, but the web root /var/www/your_domain is still empty. Create an index.html file in that location so that we can test that your new server block works as expected:
 
-    nano /var/www/your_domain/index.html
+```
+nano /var/www/your_domain/index.html
+```
 
 Include the following content in this file:
 /var/www/your_domain/index.html
 
+```
 <html>
   <head>
     <title>your_domain website</title>
@@ -287,11 +303,13 @@ Include the following content in this file:
     <p>This is the landing page of <strong>your_domain</strong>.</p>
   </body>
 </html>
+```
 
 Now go to your browser and access your server’s domain name or IP address, as listed within the server_name directive in your server block configuration file:
 
+```
 http://server_domain_or_IP
-
+```
 You’ll see a page like this:
 
 Nginx server block
@@ -301,25 +319,32 @@ If you see this page, it means your Nginx server block is working as expected.
 You can leave this file in place as a temporary landing page for your application until you set up an index.php file to replace it. Once you do that, remember to remove or rename the index.html file from your document root, as it would take precedence over an index.php file by default.
 
 Your LEMP stack is now fully configured. In the next step, we’ll create a PHP script to test that Nginx is in fact able to handle .php files within your newly configured website.
-Step 5 –Testing PHP with Nginx
+
+# Step 5 –Testing PHP with Nginx
 
 Your LEMP stack should now be completely set up. You can test it to validate that Nginx can correctly hand .php files off to your PHP processor.
 
 You can do this by creating a test PHP file in your document root. Open a new file called info.php within your document root in your text editor:
 
-    nano /var/www/your_domain/info.php
+```
+nano /var/www/your_domain/info.php
+```
 
 Type or paste the following lines into the new file. This is valid PHP code that will return information about your server:
 /var/www/your_domain/info.php
 
+```
 <?php
 phpinfo();
+```
 
 When you are finished, save and close the file by typing CTRL+X and then y and ENTER to confirm.
 
 You can now access this page in your web browser by visiting the domain name or public IP address you’ve set up in your Nginx configuration file, followed by /info.php:
 
+```
 http://server_domain_or_IP/info.php
+```
 
 You will see a web page containing detailed information about your server:
 
@@ -327,10 +352,13 @@ PHPInfo Ubuntu 20.04
 
 After checking the relevant information about your PHP server through that page, it’s best to remove the file you created as it contains sensitive information about your PHP environment and your Ubuntu server. You can use rm to remove that file:
 
-    sudo rm /var/www/your_domain/info.php
+```
+sudo rm /var/www/your_domain/info.php
+```
 
 You can always regenerate this file if you need it later.
-Step 6 — Testing Database Connection from PHP (Optional)
+
+# Step 6 — Testing Database Connection from PHP (Optional)
 
 If you want to test whether PHP is able to connect to MySQL and execute database queries, you can create a test table with dummy data and query for its contents from a PHP script. Before we can do that, we need to create a test database and a new MySQL user properly configured to access it.
 
@@ -340,38 +368,53 @@ We’ll create a database named example_database and a user named example_user, 
 
 First, connect to the MySQL console using the root account:
 
-    sudo mysql
+```
+sudo mysql
+```
 
 To create a new database, run the following command from your MySQL console:
 
-    CREATE DATABASE example_database;
+```
+mysql> CREATE DATABASE example_database;
+```
 
 Now you can create a new user and grant them full privileges on the custom database you’ve just created.
 
 The following command creates a new user named example_user, using mysql_native_password as default authentication method. We’re defining this user’s password as password, but you should replace this value with a secure password of your own choosing.
 
-    CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+mysql> CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+```
 
 Now we need to give this user permission over the example_database database:
 
-    GRANT ALL ON example_database.* TO 'example_user'@'%';
+```
+mysql> GRANT ALL ON example_database.* TO 'example_user'@'%';
+```
 
 This will give the example_user user full privileges over the example_database database, while preventing this user from creating or modifying other databases on your server.
 
 Now exit the MySQL shell with:
 
-    exit
+```
+mysql> exit
+```
 
 You can test if the new user has the proper permissions by logging in to the MySQL console again, this time using the custom user credentials:
 
-    mysql -u example_user -p
+```
+mysql -u example_user -p
+```
 
 Notice the -p flag in this command, which will prompt you for the password used when creating the example_user user. After logging in to the MySQL console, confirm that you have access to the example_database database:
 
-    SHOW DATABASES;
+```
+mysql> SHOW DATABASES;
+```
 
 This will give you the following output:
 
+```
 Output
 +--------------------+
 | Database           |
@@ -380,25 +423,33 @@ Output
 | information_schema |
 +--------------------+
 2 rows in set (0.000 sec)
+```
 
 Next, we’ll create a test table named todo_list. From the MySQL console, run the following statement:
 
-    CREATE TABLE example_database.todo_list (
-        item_id INT AUTO_INCREMENT,
-        content VARCHAR(255),
-        PRIMARY KEY(item_id)
-    );
+```
+mysql> CREATE TABLE example_database.todo_list (
+mysql>     item_id INT AUTO_INCREMENT,
+mysql>     content VARCHAR(255),
+mysql>     PRIMARY KEY(item_id)
+mysql> );
+```
 
 Insert a few rows of content in the test table. You might want to repeat the next command a few times, using different values:
 
-    INSERT INTO example_database.todo_list (content) VALUES ("My first important item");
+```
+mysql> INSERT INTO example_database.todo_list (content) VALUES ("My first important item");
+```
 
 To confirm that the data was successfully saved to your table, run:
 
-    SELECT * FROM example_database.todo_list;
+```
+mysql> SELECT * FROM example_database.todo_list;
+```
 
 You’ll see the following output:
 
+```
 Output
 +---------+--------------------------+
 | item_id | content                  |
@@ -409,19 +460,25 @@ Output
 |       4 | and this one more thing  |
 +---------+--------------------------+
 4 rows in set (0.000 sec)
+```
 
 After confirming that you have valid data in your test table, you can exit the MySQL console:
 
-    exit
+```
+mysql> exit
+```
 
 Now you can create the PHP script that will connect to MySQL and query for your content. Create a new PHP file in your custom web root directory using your preferred editor. We’ll use nano for that:
 
-    nano /var/www/your_domain/todo_list.php
+```
+nano /var/www/your_domain/todo_list.php
+```
 
 The following PHP script connects to the MySQL database and queries for the content of the todo_list table, exhibiting the results in a list. If there’s a problem with the database connection, it will throw an exception.
 Copy this content into your todo_list.php script:
 /var/www/your_domain/todo_list.php
 
+```
 <?php
 $user = "example_user";
 $password = "password";
@@ -439,12 +496,15 @@ try {
     print "Error!: " . $e->getMessage() . "<br/>";
     die();
 }
+```
 
 Save and close the file when you’re done editing.
 
 You can now access this page in your web browser by visiting the domain name or public IP address configured for your website, followed by /todo_list.php:
 
+```
 http://server_domain_or_IP/todo_list.php
+```
 
 You should see a page like this, showing the content you’ve inserted in your test table:
 
