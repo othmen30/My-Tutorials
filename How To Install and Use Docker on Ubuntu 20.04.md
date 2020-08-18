@@ -1,11 +1,11 @@
-How To Install and Use Docker on Ubuntu 20.04
+### How To Install and Use Docker on Ubuntu 20.04
 
     bhogan
 
     By Brian Hogan
     UpdatedJune 9, 2020 82.6k views
 
-Introduction
+# Introduction
 
 Docker is an application that simplifies the process of managing application processes in containers. Containers let you run your applications in resource-isolated processes. They’re similar to virtual machines, but containers are more portable, more resource-friendly, and more dependent on the host operating system.
 
@@ -19,7 +19,7 @@ To follow this tutorial, you will need the following:
     One Ubuntu 20.04 server set up by following the Ubuntu 20.04 initial server setup guide, including a sudo non-root user and a firewall.
     An account on Docker Hub if you wish to create your own images and push them to Docker Hub, as shown in Steps 7 and 8.
 
-Step 1 — Installing Docker
+## Step 1 — Installing Docker
 
 The Docker installation package available in the official Ubuntu repository may not be the latest version. To ensure we get the latest version, we’ll install Docker from the official Docker repository. To do that, we’ll add a new package source, add the GPG key from Docker to ensure the downloads are valid, and then install the package.
 
