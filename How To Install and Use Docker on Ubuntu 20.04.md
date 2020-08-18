@@ -1,11 +1,11 @@
-### How To Install and Use Docker on Ubuntu 20.04
+# How To Install and Use Docker on Ubuntu 20.04
 
     bhogan
 
     By Brian Hogan
     UpdatedJune 9, 2020 82.6k views
 
-# Introduction
+### Introduction
 
 Docker is an application that simplifies the process of managing application processes in containers. Containers let you run your applications in resource-isolated processes. They’re similar to virtual machines, but containers are more portable, more resource-friendly, and more dependent on the host operating system.
 
@@ -16,8 +16,8 @@ Prerequisites
 
 To follow this tutorial, you will need the following:
 
-    One Ubuntu 20.04 server set up by following the Ubuntu 20.04 initial server setup guide, including a sudo non-root user and a firewall.
-    An account on Docker Hub if you wish to create your own images and push them to Docker Hub, as shown in Steps 7 and 8.
+   **- One Ubuntu 20.04 server set up by following the Ubuntu 20.04 initial server setup guide, including a sudo non-root user and a firewall.**
+   **- An account on Docker Hub if you wish to create your own images and push them to Docker Hub, as shown in Steps 7 and 8.**
 
 ## Step 1 — Installing Docker
 
@@ -25,27 +25,39 @@ The Docker installation package available in the official Ubuntu repository may 
 
 First, update your existing list of packages:
 
-    sudo apt update
+```
+sudo apt update
+```
 
 Next, install a few prerequisite packages which let apt use packages over HTTPS:
 
-    sudo apt install apt-transport-https ca-certificates curl software-properties-common
+```
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+```
 
 Then add the GPG key for the official Docker repository to your system:
 
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
 
 Add the Docker repository to APT sources:
 
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+```
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+```
 
 Next, update the package database with the Docker packages from the newly added repo:
 
-    sudo apt update
+```
+sudo apt update
+```
 
 Make sure you are about to install from the Docker repo instead of the default Ubuntu repo:
 
-    apt-cache policy docker-ce
+```
+apt-cache policy docker-ce
+```
 
 You’ll see output like this, although the version number for Docker may be different:
 Output of apt-cache policy docker-ce
