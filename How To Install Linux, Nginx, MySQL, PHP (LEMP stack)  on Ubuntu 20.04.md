@@ -269,6 +269,8 @@ Activate your configuration by linking to the config file from Nginx’s sites-e
 sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 ```
 
+Unlink the default Nginx's congif:
+
 ```
 sudo unlink /etc/nginx/sites-enabled/default
 ```
