@@ -269,6 +269,10 @@ Activate your configuration by linking to the config file from Nginx’s sites-e
 sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 ```
 
+```
+sudo unlink /etc/nginx/sites-enabled/default
+```
+
 This will tell Nginx to use the configuration next time it is reloaded. You can test your configuration for syntax errors by typing:
 
 ```
