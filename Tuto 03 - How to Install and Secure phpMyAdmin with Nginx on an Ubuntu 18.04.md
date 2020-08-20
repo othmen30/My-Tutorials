@@ -20,7 +20,7 @@ Before you get started with this guide, you’ll need the following available to
 
 Because phpMyAdmin handles authentication using MySQL credentials, it is strongly advisable to install an SSL/TLS certificate to enable encrypted traffic between server and client. If you do not have an existing domain configured with a valid certificate, you can follow this guide on securing Nginx with Let’s Encrypt on Ubuntu 18.04.
 
-> **Warning: If you don’t have an SSL/TLS certificate installed on the server and you still want to proceed, please consider enforcing access via SSH Tunnels as explained in Step 5 of this guide.
+> **Warning: If you don’t have an SSL/TLS certificate installed on the server and you still want to proceed, please consider enforcing access via SSH Tunnels as explained in Step 5 of this guide.**
 
 Once you have met these prerequisites, you can go ahead with the rest of the guide.
 Step 1 — Installing phpMyAdmin
