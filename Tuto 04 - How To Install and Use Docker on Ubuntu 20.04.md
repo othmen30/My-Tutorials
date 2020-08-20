@@ -500,7 +500,7 @@ This section shows you how to push a Docker image to Docker Hub. To learn how to
 To push your image, first log into Docker Hub.
 
 ```
-docker login -u docker-registry-username
+docker login -u **docker-registry-username**
 ```
 
 You’ll be prompted to authenticate using your Docker Hub password. If you specified the correct password, authentication should succeed.
