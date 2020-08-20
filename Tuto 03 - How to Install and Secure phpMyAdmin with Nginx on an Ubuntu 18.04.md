@@ -9,18 +9,18 @@ While many users need the functionality of a database system like MySQL, interac
 
 phpMyAdmin was created so that users can interact with MySQL through an intuitive web interface, running alongside a PHP development environment. In this guide, we’ll discuss how to install phpMyAdmin on top of an Nginx server, and how to configure the server for increased security.
 
-> Note: There are important security considerations when using software like phpMyAdmin, since it runs on the database server, it deals with database credentials, and it enables a user to easily execute arbitrary SQL queries into your database. Because phpMyAdmin is a widely-deployed PHP application, it is frequently targeted for attack. We will go over some security measures you can take in this tutorial so that you can make informed decisions.
+> **Note: There are important security considerations when using software like phpMyAdmin, since it runs on the database server, it deals with database credentials, and it enables a user to easily execute arbitrary SQL queries into your database. Because phpMyAdmin is a widely-deployed PHP application, it is frequently targeted for attack. We will go over some security measures you can take in this tutorial so that you can make informed decisions.
 
 ## Prerequisites
 
 Before you get started with this guide, you’ll need the following available to you:
 
-An Ubuntu 18.04 server running a LEMP (Linux, Nginx, MySQL and PHP) stack secured with ufw, as described in the initial server setup guide for Ubuntu 18.04. If you haven’t set up your server yet, you can follow the guide on installing a LEMP stack on Ubuntu 18.04.
-Access to this server as a non-root user with sudo privileges.
+- An Ubuntu 18.04 server running a LEMP (Linux, Nginx, MySQL and PHP) stack secured with ufw, as described in the initial server setup guide for Ubuntu 18.04. If you haven’t set up your server yet, you can follow the guide on installing a LEMP stack on Ubuntu 18.04.
+- Access to this server as a non-root user with sudo privileges.
 
 Because phpMyAdmin handles authentication using MySQL credentials, it is strongly advisable to install an SSL/TLS certificate to enable encrypted traffic between server and client. If you do not have an existing domain configured with a valid certificate, you can follow this guide on securing Nginx with Let’s Encrypt on Ubuntu 18.04.
 
-Warning: If you don’t have an SSL/TLS certificate installed on the server and you still want to proceed, please consider enforcing access via SSH Tunnels as explained in Step 5 of this guide.
+> **Warning: If you don’t have an SSL/TLS certificate installed on the server and you still want to proceed, please consider enforcing access via SSH Tunnels as explained in Step 5 of this guide.
 
 Once you have met these prerequisites, you can go ahead with the rest of the guide.
 Step 1 — Installing phpMyAdmin
