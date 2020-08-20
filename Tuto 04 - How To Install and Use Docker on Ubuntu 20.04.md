@@ -16,8 +16,8 @@ Prerequisites
 
 To follow this tutorial, you will need the following:
 
-   **- One Ubuntu 20.04 server set up by following the Ubuntu 20.04 initial server setup guide, including a sudo non-root user and a firewall.**
-   **- An account on Docker Hub if you wish to create your own images and push them to Docker Hub, as shown in Steps 7 and 8.**
+**- One Ubuntu 20.04 server set up by following the Ubuntu 20.04 initial server setup guide, including a sudo non-root user and a firewall.**
+**- An account on Docker Hub if you wish to create your own images and push them to Docker Hub, as shown in Steps 7 and 8.**
 
 ## Step 1 — Installing Docker
 
