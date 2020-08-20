@@ -9,7 +9,7 @@ While many users need the functionality of a database system like MySQL, interac
 
 phpMyAdmin was created so that users can interact with MySQL through an intuitive web interface, running alongside a PHP development environment. In this guide, we’ll discuss how to install phpMyAdmin on top of an Nginx server, and how to configure the server for increased security.
 
-> **Note: There are important security considerations when using software like phpMyAdmin, since it runs on the database server, it deals with database credentials, and it enables a user to easily execute arbitrary SQL queries into your database. Because phpMyAdmin is a widely-deployed PHP application, it is frequently targeted for attack. We will go over some security measures you can take in this tutorial so that you can make informed decisions.
+> **Note: There are important security considerations when using software like phpMyAdmin, since it runs on the database server, it deals with database credentials, and it enables a user to easily execute arbitrary SQL queries into your database. Because phpMyAdmin is a widely-deployed PHP application, it is frequently targeted for attack. We will go over some security measures you can take in this tutorial so that you can make informed decisions.**
 
 ## Prerequisites
 
