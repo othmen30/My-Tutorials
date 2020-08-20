@@ -293,7 +293,7 @@ For a more robust long-term solution, you can use IP-based access control to cre
 
 Combining IP-based access control with SSH tunneling greatly increases security because it fully blocks access coming from the public internet (except for authorized IPs), in addition to providing a secure channel between user and server through the use of encrypted tunnels.
 
-# Setting Up IP-Based Access Control on Nginx
+### Setting Up IP-Based Access Control on Nginx
 
 On Nginx, IP-based access control can be defined in the corresponding location block of a given site, using the directives allow and deny. For instance, if we want to only allow requests coming from a given host, we should include the following two lines, in this order, inside the relevant location block for the site we would like to protect:
 
@@ -382,7 +382,7 @@ https://server_domain_or_IP/nothingtosee
 
 In the next section, we’ll see how to use SSH tunneling to access the web server through local requests. This way, you’ll still be able to access phpMyAdmin’s interface even when your IP address changes.
 
-# Accessing phpMyAdmin Through an Encrypted Tunnel
+### Accessing phpMyAdmin Through an Encrypted Tunnel
 
 SSH tunneling works as a way of redirecting network traffic through encrypted channels. By running an ssh command similar to what you would use to log into a server, you can create a secure “tunnel” between your local machine and that server. All traffic coming in on a given local port can now be redirected through the encrypted tunnel and use the remote server as a proxy, before reaching out to the internet. It’s similar to what happens when you use a VPN (Virtual Private Network), however SSH tunneling is much simpler to set up.
 
