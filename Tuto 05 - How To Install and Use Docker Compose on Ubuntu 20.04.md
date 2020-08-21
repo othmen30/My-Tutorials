@@ -20,48 +20,64 @@ To follow this article, you will need:
 
 ## Step 1 — Installing Docker Compose
 
-To make sure we obtain the most updated stable version of Docker Compose, we’ll download this software from its official Github repository.
+To make sure we obtain the most updated stable version of Docker Compose, we’ll download this software from its [official Github repository.](https://github.com/docker/compose)
 
 First, confirm the latest version available in their releases page. At the time of this writing, the most current stable version is 1.26.0.
 
 The following command will download the 1.26.0 release and save the executable file at /usr/local/bin/docker-compose, which will make this software globally accessible as docker-compose:
 
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
 
 Next, set the correct permissions so that the docker-compose command is executable:
 
-    sudo chmod +x /usr/local/bin/docker-compose
+```
+sudo chmod +x /usr/local/bin/docker-compose
+```
 
 To verify that the installation was successful, you can run:
 
-    docker-compose --version
+```
+docker-compose --version
+```
 
 You’ll see output similar to this:
 
 Output
+```
 docker-compose version 1.26.0, build 8a1c60f6
+```
 
 Docker Compose is now successfully installed on your system. In the next section, we’ll see how to set up a docker-compose.yml file and get a containerized environment up and running with this tool.
-Step 2 — Setting Up a docker-compose.yml File
+
+## Step 2 — Setting Up a docker-compose.yml File
 
 To demonstrate how to set up a docker-compose.yml file and work with Docker Compose, we’ll create a web server environment using the official Nginx image from Docker Hub, the public Docker registry. This containerized environment will serve a single static HTML file.
 
 Start off by creating a new directory in your home folder, and then moving into it:
 
-    mkdir ~/compose-demo
-    cd ~/compose-demo
+```
+mkdir ~/compose-demo
+cd ~/compose-demo
+```
 
 In this directory, set up an application folder to serve as the document root for your Nginx environment:
 
-    mkdir app
+```
+mkdir app
+```
 
 Using your preferred text editor, create a new index.html file within the app folder:
 
-    nano app/index.html
+```
+nano app/index.html
+```
 
 Place the following content into this file:
-~/compose-demo/app/index.html
 
+~/compose-demo/app/index.html
+```
 <!doctype html>
 <html lang="en">
 <head>
@@ -76,16 +92,20 @@ Place the following content into this file:
 
 </body>
 </html>
+```
 
 Save and close the file when you’re done. If you are using nano, you can do that by typing CTRL+X, then Y and ENTER to confirm.
 
 Next, create the docker-compose.yml file:
 
-    nano docker-compose.yml
+```
+nano docker-compose.yml
+```
 
 Insert the following content on your docker-compose.yml file:
-docker-compose.yml
 
+docker-compose.yml
+```
 version: '3.7'
 services:
   web:
@@ -94,6 +114,7 @@ services:
       - "8000:80"
     volumes:
       - ./app:/usr/share/nginx/html
+```
 
 The docker-compose.yml file typically starts off with the version definition. This will tell Docker Compose which configuration version we’re using.
 
@@ -104,7 +125,8 @@ The volumes directive will create a shared volume between the host machine and t
 Save and close the file.
 
 We have set up a demo page and a docker-compose.yml file to create a containerized web server environment that will serve it. In the next step, we’ll bring this environment up with Docker Compose.
-Step 3 — Running Docker Compose
+
+## Step 3 — Running Docker Compose
 
 With the docker-compose.yml file in place, we can now execute Docker Compose to bring our environment up. The following command will download the necessary Docker images, create a container for the web service, and run the containerized environment in background mode:
 
