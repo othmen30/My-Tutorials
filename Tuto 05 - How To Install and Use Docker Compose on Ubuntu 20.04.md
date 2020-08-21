@@ -170,8 +170,7 @@ You can now access the demo application by pointing your browser to either local
 
 You’ll see a page like this:
 
-Docker Compose Demo Page
-https://assets.digitalocean.com/articles/docker_compose_ubuntu2004/demo_page.png
+[Docker Compose Demo Page](https://assets.digitalocean.com/articles/docker_compose_ubuntu2004/demo_page.png)
 
 Because the shared volume you’ve set up within the docker-compose.yml file keeps your app folder files in sync with the container’s document root. If you make any changes to the index.html file, they will be automatically picked up by the container and thus reflected on your browser when you reload the page.
 
