@@ -130,11 +130,14 @@ We have set up a demo page and a docker-compose.yml file to create a containeriz
 
 With the docker-compose.yml file in place, we can now execute Docker Compose to bring our environment up. The following command will download the necessary Docker images, create a container for the web service, and run the containerized environment in background mode:
 
-    docker-compose up -d
+```
+docker-compose up -d
+```
 
 Docker Compose will first look for the defined image on your local system, and if it can’t locate the image it will download the image from Docker Hub. You’ll see output like this:
 
 Output
+```
 Creating network "compose-demo_default" with the default driver
 Pulling web (nginx:alpine)...
 alpine: Pulling from library/nginx
@@ -146,23 +149,29 @@ c829a9c40ab2: Pull complete
 Digest: sha256:57254039c6313fe8c53f1acbf15657ec9616a813397b74b063e32443427c5502
 Status: Downloaded newer image for nginx:alpine
 Creating compose-demo_web_1 ... done
+```
 
 Your environment is now up and running in the background. To verify that the container is active, you can run:
 
-    docker-compose ps
+```
+docker-compose ps
+```
 
 This command will show you information about the running containers and their state, as well as any port redirections currently in place:
 
 Output
+```
        Name                     Command               State          Ports        
 ----------------------------------------------------------------------------------
 compose-demo_web_1   /docker-entrypoint.sh ngin ...   Up      0.0.0.0:8000->80/tcp
+```
 
 You can now access the demo application by pointing your browser to either localhost:8000 if you are running this demo on your local machine, or your_server_domain_or_IP:8000 if you are running this demo on a remote server.
 
 You’ll see a page like this:
 
 Docker Compose Demo Page
+https://assets.digitalocean.com/articles/docker_compose_ubuntu2004/demo_page.png
 
 Because the shared volume you’ve set up within the docker-compose.yml file keeps your app folder files in sync with the container’s document root. If you make any changes to the index.html file, they will be automatically picked up by the container and thus reflected on your browser when you reload the page.
 
