@@ -15,8 +15,8 @@ In this guide, we’ll demonstrate how to install Docker Compose on an Ubuntu 20
 
 To follow this article, you will need:
 
-- Access to an Ubuntu 20.04 local machine or development server as a non-root user with sudo privileges. If you’re using a remote server, it’s advisable to have an active firewall installed. To set these up, please refer to our Initial Server Setup Guide for Ubuntu 20.04.
-- Docker installed on your server or local machine, following Steps 1 and 2 of How To Install and Use Docker on Ubuntu 20.04.
+- Access to an Ubuntu 20.04 local machine or development server as a non-root user with sudo privileges. If you’re using a remote server, it’s advisable to have an active firewall installed. To set these up, please refer to our [initial server setup guide](https://github.com/othmen30/Tutorials/blob/master/Tuto%2001%20-%20Initial%20Server%20Setup%20with%20Ubuntu%2020.04%20(DigitalOcean).md).
+- Docker installed on your server or local machine, following Steps 1 and 2 of [How To Install and Use Docker on Ubuntu 20.04](https://github.com/othmen30/Tutorials/blob/master/Tuto%2004%20-%20How%20To%20Install%20and%20Use%20Docker%20on%20Ubuntu%2020.04.md).
 
 ## Step 1 — Installing Docker Compose
 
