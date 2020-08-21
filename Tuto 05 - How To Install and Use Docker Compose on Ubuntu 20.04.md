@@ -166,7 +166,7 @@ Output
 compose-demo_web_1   /docker-entrypoint.sh ngin ...   Up      0.0.0.0:8000->80/tcp
 ```
 
-You can now access the demo application by pointing your browser to either localhost:8000 if you are running this demo on your local machine, or your_server_domain_or_IP:8000 if you are running this demo on a remote server.
+You can now access the demo application by pointing your browser to either ```localhost:8000``` if you are running this demo on your local machine, or ```your_server_domain_or_IP:8000``` if you are running this demo on a remote server.
 
 You’ll see a page like this:
 
