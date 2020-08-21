@@ -175,17 +175,21 @@ You’ll see a page like this:
 Because the shared volume you’ve set up within the docker-compose.yml file keeps your app folder files in sync with the container’s document root. If you make any changes to the index.html file, they will be automatically picked up by the container and thus reflected on your browser when you reload the page.
 
 In the next step, you’ll see how to manage your containerized environment with Docker Compose commands.
-Step 4 — Getting Familiar with Docker Compose Commands
+
+## Step 4 — Getting Familiar with Docker Compose Commands
 
 You’ve seen how to set up a docker-compose.yml file and bring your environment up with docker-compose up. You’ll now see how to use Docker Compose commands to manage and interact with your containerized environment.
 
 To check the logs produced by your Nginx container, you can use the logs command:
 
-    docker-compose logs
+```
+docker-compose logs
+```
 
 You’ll see output similar to this:
 
 Output
+```
 Attaching to compose-demo_web_1
 web_1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 web_1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
@@ -195,43 +199,63 @@ web_1  | 10-listen-on-ipv6-by-default.sh: Enabled listen on IPv6 in /etc/nginx/c
 web_1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
 web_1  | /docker-entrypoint.sh: Configuration complete; ready for start up
 web_1  | 172.22.0.1 - - [02/Jun/2020:10:47:13 +0000] "GET / HTTP/1.1" 200 353 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36" "-"
+```
 
 If you want to pause the environment execution without changing the current state of your containers, you can use:
 
-    docker-compose pause
+```
+docker-compose pause
+```
 
 Output
+```
 Pausing compose-demo_web_1 ... done
+```
 
 To resume execution after issuing a pause:
 
-    docker-compose unpause
+```
+docker-compose unpause
+```
 
 Output
+```
 Unpausing compose-demo_web_1 ... done
+```
 
 The stop command will terminate the container execution, but it won’t destroy any data associated with your containers:
 
-    docker-compose stop
+```
+docker-compose stop
+```
 
 Output
+```
 Stopping compose-demo_web_1 ... done
+```
 
 If you want to remove the containers, networks, and volumes associated with this containerized environment, use the down command:
 
-    docker-compose down
+```
+docker-compose down
+```
 
 Output
+```
 Removing compose-demo_web_1 ... done
 Removing network compose-demo_default
+```
 
 Notice that this won’t remove the base image used by Docker Compose to spin up your environment (in our case, nginx:alpine). This way, whenever you bring your environment up again with a docker-compose up, the process will be much faster since the image is already on your system.
 
 In case you want to also remove the base image from your system, you can use:
 
-    docker image rm nginx:alpine
+```
+docker image rm nginx:alpine
+```
 
 Output
+```
 Untagged: nginx:alpine
 Untagged: nginx@sha256:b89a6ccbda39576ad23fd079978c967cecc6b170db6e7ff8a769bf2259a71912
 Deleted: sha256:7d0cdcc60a96a5124763fddf5d534d058ad7d0d8d4c3b8be2aefedf4267d0270
@@ -240,10 +264,12 @@ Deleted: sha256:c6bbc4bdac396583641cb44cd35126b2c195be8fe1ac5e6c577c14752bbe9157
 Deleted: sha256:35789b1e1a362b0da8392ca7d5759ef08b9a6b7141cc1521570f984dc7905eb6
 Deleted: sha256:a3efaa65ec344c882fe5d543a392a54c4ceacd1efd91662d06964211b1be4c08
 Deleted: sha256:3e207b409db364b595ba862cdc12be96dcdad8e36c59a03b7b3b61c946a5741a
+```
 
-Note: Please refer to our guide on How to Install and Use Docker for a more detailed reference on Docker commands.
-Conclusion
+**Note: Please refer to our guide on How to Install and Use Docker for a more detailed reference on Docker commands.**
+
+## Conclusion
 
 In this guide, we’ve seen how to install Docker Compose and set up a containerized environment based on an Nginx web server image. We’ve also seen how to manage this environment using Compose commands.
 
-For a complete reference of all available docker-compose commands, check the official documentation.
+For a complete reference of all available docker-compose commands, check the [official documentation.](https://docs.docker.com/compose/reference/)
