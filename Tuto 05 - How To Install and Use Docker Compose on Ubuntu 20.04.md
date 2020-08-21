@@ -223,7 +223,7 @@ Output
 Unpausing compose-demo_web_1 ... done
 ```
 
-The stop command will terminate the container execution, but it won’t destroy any data associated with your containers:
+The ```stop``` command will terminate the container execution, but it won’t destroy any data associated with your containers:
 
 ```
 docker-compose stop
