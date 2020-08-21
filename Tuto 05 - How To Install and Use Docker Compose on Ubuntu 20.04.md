@@ -116,11 +116,11 @@ services:
       - ./app:/usr/share/nginx/html
 ```
 
-The docker-compose.yml file typically starts off with the version definition. This will tell Docker Compose which configuration version we’re using.
+The docker-compose.yml file typically starts off with the ```version``` definition. This will tell Docker Compose which configuration ```version``` we’re using.
 
-We then have the services block, where we set up the services that are part of this environment. In our case, we have a single service called web. This service uses the nginx:alpine image and sets up a port redirection with the ports directive. All requests on port 8000 of the host machine (the system from where you’re running Docker Compose) will be redirected to the web container on port 80, where Nginx will be running.
+We then have the ```services``` block, where we set up the services that are part of this environment. In our case, we have a single service called web. This service uses the ```nginx:alpine``` image and sets up a port redirection with the ports directive. All requests on port 8000 of the host machine (the system from where you’re running Docker Compose) will be redirected to the web container on port 80, where Nginx will be running.
 
-The volumes directive will create a shared volume between the host machine and the container. This will share the local app folder with the container, and the volume will be located at /usr/share/nginx/html inside the container, which will then overwrite the default document root for Nginx.
+The ```volumes``` directive will create a shared volume between the host machine and the container. This will share the local app folder with the container, and the volume will be located at ```/usr/share/nginx/html``` inside the container, which will then overwrite the default document root for Nginx.
 
 Save and close the file.
 
